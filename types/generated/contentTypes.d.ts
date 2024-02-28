@@ -362,40 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiTrabajadorTrabajador extends Schema.CollectionType {
-  collectionName: 'trabajadores';
-  info: {
-    singularName: 'trabajador';
-    pluralName: 'trabajadores';
-    displayName: 'trabajadores';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    clave: Attribute.String & Attribute.Required & Attribute.Unique;
-    nombre: Attribute.String & Attribute.Required;
-    salario: Attribute.Decimal & Attribute.Required;
-    numeroCelular: Attribute.String;
-    lastUp: Attribute.DateTime;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::trabajador.trabajador',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::trabajador.trabajador',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -817,6 +783,105 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiPagoPago extends Schema.CollectionType {
+  collectionName: 'pagos';
+  info: {
+    singularName: 'pago';
+    pluralName: 'pagos';
+    displayName: 'pagos';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    trabajadorId: Attribute.String;
+    fecha: Attribute.DateTime;
+    monto: Attribute.Decimal;
+    descripcion: Attribute.String;
+    dias: Attribute.Integer;
+    clave: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::pago.pago', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::pago.pago', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPrestamoPrestamo extends Schema.CollectionType {
+  collectionName: 'prestamos';
+  info: {
+    singularName: 'prestamo';
+    pluralName: 'prestamos';
+    displayName: 'prestamos';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    trabajadorId: Attribute.String;
+    monto: Attribute.Decimal;
+    fechaInicio: Attribute.DateTime;
+    pendiente: Attribute.Decimal;
+    fechaFin: Attribute.DateTime;
+    clave: Attribute.String & Attribute.Unique;
+    lastUp: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTrabajadorTrabajador extends Schema.CollectionType {
+  collectionName: 'trabajadores';
+  info: {
+    singularName: 'trabajador';
+    pluralName: 'trabajadores';
+    displayName: 'trabajadores';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clave: Attribute.String & Attribute.Required & Attribute.Unique;
+    nombre: Attribute.String & Attribute.Required;
+    salario: Attribute.Decimal & Attribute.Required;
+    numeroCelular: Attribute.String;
+    lastUp: Attribute.DateTime;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::trabajador.trabajador',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::trabajador.trabajador',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -827,7 +892,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::trabajador.trabajador': ApiTrabajadorTrabajador;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -836,6 +900,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::pago.pago': ApiPagoPago;
+      'api::prestamo.prestamo': ApiPrestamoPrestamo;
+      'api::trabajador.trabajador': ApiTrabajadorTrabajador;
     }
   }
 }

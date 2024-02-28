@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prestamos",
+  "info": {
+    "singularName": "prestamo",
+    "pluralName": "prestamos",
+    "displayName": "prestamos",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "trabajadorId": {
+      "type": "string"
+    },
+    "monto": {
+      "type": "decimal"
+    },
+    "fechaInicio": {
+      "type": "datetime"
+    },
+    "pendiente": {
+      "type": "decimal"
+    },
+    "fechaFin": {
+      "type": "datetime"
+    },
+    "clave": {
+      "type": "string",
+      "unique": true
+    },
+    "lastUp": {
+      "type": "datetime"
+    }
+  }
+}
